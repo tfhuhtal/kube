@@ -22,7 +22,8 @@ kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 logoutput-dep-57745f7fd-f24jg   1/1     Running   0          51m
 project-dep-7766bb4d47-x56m8    1/1     Running   0          8s
-tuomas@zoe:~/kurssit/kube/project$ kubectl logs project-dep-7766bb4d47-x56m8
+
+kubectl logs project-dep-7766bb4d47-x56m8
 
 > project@1.0.0 start
 > node index.js
