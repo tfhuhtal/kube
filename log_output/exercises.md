@@ -1,3 +1,27 @@
+# Exercise 1.03
+
+```bash
+kubectl apply -f manifests/deployment.yaml
+deployment.apps/logoutput-dep created
+
+kubectl get pods
+NAME                             READY   STATUS    RESTARTS   AGE
+project-dep-7766bb4d47-x56m8     1/1     Running   0          12m
+logoutput-dep-68d589988d-849vm   1/1     Running   0          10s
+
+kubectl logs logoutput-dep-68d589988d-849vm
+
+> log_output@1.0.0 start
+> node index.js
+
+2024-09-01T15:40:22.965Z: 0480970d-1af2-4dc9-9db5-6893fb735276
+2024-09-01T15:40:27.974Z: 62782037-e328-4fb5-9ef2-f3a1122681cc
+2024-09-01T15:40:32.979Z: 3fdcaa16-3632-4924-92d9-606b647f8e27
+2024-09-01T15:40:37.981Z: e822fea9-582c-4b02-be5e-c4a7ec1f742e
+2024-09-01T15:40:42.985Z: 0919a46d-e357-4123-a504-c2222c97b469
+2024-09-01T15:40:47.989Z: a0884af5-bd25-4e71-ac44-fda1172333b3
+```
+
 # Exercise 1.01
 
 Get pods command 
