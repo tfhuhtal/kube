@@ -1,3 +1,23 @@
+# Exercise 1.04
+
+```bash
+kubectl delete deployment project-dep
+deployment.apps "project-dep" deleted
+
+kubectl apply -f manifests/deployment.yaml
+deployment.apps/project-dep created
+
+kubectl get pods
+NAME                             READY   STATUS    RESTARTS   AGE
+logoutput-dep-68d589988d-849vm   1/1     Running   0          6m3s
+project-dep-866679699f-brcvx     1/1     Running   0          13s
+
+kubectl logs project-dep-866679699f-brcvx
+
+> project@1.0.0 start
+> node index.js
+```
+
 # Exercise 1.02
 
 ```bash
