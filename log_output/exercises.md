@@ -1,0 +1,32 @@
+# Exercise 1.01
+
+Get pods command 
+
+```bash 
+kubectl get pods
+NAME                            READY   STATUS    RESTARTS   AGE
+logoutput-dep-57745f7fd-f24jg   1/1     Running   0          37m
+```
+
+Get logoutput-dep logs
+
+```bash
+kubectl logs logoutput-dep-57745f7fd-f24jg
+
+> log_output@1.0.0 start
+> node index.js
+
+2024-09-01T14:37:21.746Z: 2a4bae5d-8138-423b-a4dd-b3f9e4071b2c
+2024-09-01T14:37:26.754Z: 50ddf028-3753-473e-bdff-8201ae517f97
+2024-09-01T14:37:31.758Z: 4636781a-9f40-4a5d-a2fa-8c170bb33fcb
+2024-09-01T14:37:36.761Z: a42aa6c3-6068-4289-9b11-cf314384edd2
+2024-09-01T14:37:41.766Z: ed8c7fa0-4df8-4cde-aa64-809a7c8f983d
+2024-09-01T14:37:46.769Z: c924d1a8-e666-4f5b-8e13-433ae751ae11
+2024-09-01T14:37:51.771Z: 95eacb8f-db3f-46d9-a236-522729d2f169
+2024-09-01T14:37:56.777Z: 94dec4d1-d4dc-4fb3-a38e-1221a7911e6f
+2024-09-01T14:38:01.781Z: 48eda24a-928b-4826-9755-903f01390664
+2024-09-01T14:38:06.786Z: d1273fe7-dcd6-405f-bce2-d548a5c0bc23
+2024-09-01T14:38:11.791Z: d3485034-08a9-49bc-9220-727508134496
+2024-09-01T14:38:16.793Z: 45260aea-c252-4997-a144-c661ac4e4d25
+2024-09-01T14:38:21.799Z: 3d15af02-a2ae-4ebf-b390-d446e7048a86
+```
