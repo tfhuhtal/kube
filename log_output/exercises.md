@@ -1,3 +1,45 @@
+# Exercise 1.07 
+
+```bash
+tuomas@zoe:~/kurssit/kube/log_output$ docker build -t tfhuhtal/logoutput:1.077 --no-cache .
+[+] Building 6.2s (11/11) FINISHED                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                   0.0s
+ => => transferring dockerfile: 139B                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/node:alpine                                                                         1.1s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                            0.0s
+ => [internal] load .dockerignore                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                        0.0s
+ => [1/5] FROM docker.io/library/node:alpine@sha256:ed9736a13b88ba55cbc08c75c9edac8ae7f72840482e40324670b299336680c1                   0.0s
+ => [internal] load build context                                                                                                      0.0s
+ => => transferring context: 34.79kB                                                                                                   0.0s
+ => CACHED [2/5] WORKDIR /usr/src/app                                                                                                  0.0s
+ => [3/5] COPY package* ./                                                                                                             0.0s
+ => [4/5] RUN npm ci                                                                                                                   4.9s
+ => [5/5] COPY . .                                                                                                                     0.1s
+ => exporting to image                                                                                                                 0.1s
+ => => exporting layers                                                                                                                0.1s
+ => => writing image sha256:b80a79bc5defa87fa882f8ffd7cec0d1e96af06f902fc84d41522731df73ecf5                                           0.0s
+ => => naming to docker.io/tfhuhtal/logoutput:1.077                                                                                    0.0s
+tuomas@zoe:~/kurssit/kube/log_output$ docker push tfhuhtal/logoutput:1.077
+The push refers to repository [docker.io/tfhuhtal/logoutput]
+8723cf39443c: Layer already exists
+67991c1d5d53: Pushed
+1837507c3a75: Pushed
+cbac0077bdea: Layer already exists
+31e94c6eb7ae: Layer already exists
+966924c38592: Layer already exists
+c727fbeac135: Layer already exists
+78561cef0761: Layer already exists
+1.077: digest: sha256:99159d1a5a9f5a4e0c3c0ac5c1fc84eb7a79815e91a909dd320b55f6939f2629 size: 1994
+tuomas@zoe:~/kurssit/kube/log_output$ v .
+tuomas@zoe:~/kurssit/kube/log_output$ kubectl apply -f manifests/
+deployment.apps/logoutput-dep configured
+ingress.networking.k8s.io/logoutput-ingress unchanged
+service/logoutput-svc unchanged
+tuomas@zoe:~/kurssit/kube/log_output$ curl -L localhost:8081
+2024-09-02T16:06:08.114Z: b74d5645-ef0e-4cef-b40d-b4f382172293
+```
+
 # Exercise 1.03
 
 ```bash

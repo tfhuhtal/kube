@@ -1,3 +1,21 @@
+# Exercise 1.06
+
+```bash
+kubectl apply -f manifests/deployment.yaml
+deployment.apps/project-dep created
+
+kubectl apply -f manifests/service.yaml
+service/project-svc unchanged
+
+kubectl get pods
+NAME                             READY   STATUS    RESTARTS   AGE
+logoutput-dep-68d589988d-pwv7v   1/1     Running   0          9m46s
+project-dep-6f95f8779d-lmlfb     1/1     Running   0          11s
+
+curl localhost:8082
+Hello
+```
+
 # Exercise 1.05
 
 ```bash

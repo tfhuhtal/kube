@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: tuomas/logoutput:1.03
+          image: tfhuhtal/logoutput:1.077

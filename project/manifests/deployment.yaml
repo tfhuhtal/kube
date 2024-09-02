@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: project
-          image: tuomas/project:1.02
+          image: tfhuhtal/project:1.04
