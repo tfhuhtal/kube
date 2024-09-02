@@ -1,3 +1,24 @@
+# Exercise 1.05
+
+```bash
+kubectl get pods
+NAME                             READY   STATUS    RESTARTS      AGE
+logoutput-dep-68d589988d-849vm   1/1     Running   1 (24m ago)   23h
+project-dep-866679699f-brcvx     1/1     Running   1 (24m ago)   23h
+tuomas@zoe:~/kurssit/kube/project$ kubectl port-forward project-dep-866679699f-brcvx 3003:3000
+Forwarding from 127.0.0.1:3003 -> 3000
+Forwarding from [::1]:3003 -> 3000
+Handling connection for 3003
+```
+
+And I fetched the html response from localhost:3003 
+
+```bash
+curl -L localhost:3003
+Hello
+```
+```
+
 # Exercise 1.04
 
 ```bash
