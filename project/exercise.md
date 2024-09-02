@@ -1,3 +1,14 @@
+# Exercise 1.08
+
+```bash
+tuomas@zoe:~/kurssit/kube/project$ kubectl apply -f manifests/
+deployment.apps/project-dep created
+ingress.networking.k8s.io/project-ingress created
+service/project-svc created
+tuomas@zoe:~/kurssit/kube/project$ curl -L localhost:8081
+Hellot
+```
+
 # Exercise 1.06
 
 ```bash
