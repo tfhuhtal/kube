@@ -14,4 +14,11 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: tfhuhtal/pingpong:1.09
+          image: tfhuhtal/pingpong:1.11
+          volumeMounts:
+            - name: logoutput-volume 
+              mountPath: /usr/src/app/files
+      volumes:
+        - name: logoutput-volume
+          persistentVolumeClaim:
+            claimName: image-claim

@@ -14,10 +14,11 @@ spec:
     spec:
       volumes:
         - name: logoutput-volume 
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: logoutput
-          image: tfhuhtal/logoutput-finder:1.10
+          image: tfhuhtal/logoutput-finder:1.11
           volumeMounts: 
             - name: logoutput-volume
               mountPath: /usr/src/app/files

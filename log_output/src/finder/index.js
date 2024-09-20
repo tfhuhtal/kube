@@ -11,9 +11,11 @@ const app = express()
 app.get('/', (req, res) => {
   try {
     const hash = fs.readFileSync('files/log.txt', 'utf8')
+    const pong = fs.readFileSync('files/pong.txt', 'utf8')
+
     if (!hash) res.status(404).send('No logs found')
 
-    res.send(hash)
+    res.send(`${hash}. ${pong}`)
   } catch (err) {
     res.status(500).send(err.message)
   }
