@@ -12,6 +12,17 @@ spec:
       labels:
         app: logoutput
     spec:
+      volumes:
+        - name: logoutput-volume 
+          emptyDir: {}
       containers:
         - name: logoutput
-          image: tfhuhtal/logoutput:1.077
+          image: tfhuhtal/logoutput-finder:1.10
+          volumeMounts: 
+            - name: logoutput-volume
+              mountPath: /usr/src/app/files
+        - name: logoutput-hasher
+          image: tfhuhtal/logoutput-hasher:1.101
+          volumeMounts:
+            - name: logoutput-volume
+              mountPath: /usr/src/app/files

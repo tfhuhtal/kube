@@ -1,3 +1,55 @@
+# Exercise 1.10
+
+```bash
+tuomas@zoe:~/kurssit/kube/log_output$ docker build -t tfhuhtal/logoutput-hasher:1.101 --no-cache ./src/hasher/
+[+] Building 2.2s (11/11) FINISHED                                                                                                                                                                  docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                          0.0s
+ => => transferring dockerfile: 139B                                                                                                                                                                          0.0s
+ => [internal] load metadata for docker.io/library/node:alpine                                                                                                                                                1.5s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                                   0.0s
+ => [internal] load .dockerignore                                                                                                                                                                             0.0s
+ => => transferring context: 2B                                                                                                                                                                               0.0s
+ => [1/5] FROM docker.io/library/node:alpine@sha256:c9bb43423a6229aeddf3d16ae6aaa0ff71a0b2951ce18ec8fedb6f5d766cf286                                                                                          0.0s
+ => [internal] load build context                                                                                                                                                                             0.0s
+ => => transferring context: 129B                                                                                                                                                                             0.0s
+ => CACHED [2/5] WORKDIR /usr/src/app                                                                                                                                                                         0.0s
+ => [3/5] COPY package* ./                                                                                                                                                                                    0.0s
+ => [4/5] RUN npm ci                                                                                                                                                                                          0.5s
+ => [5/5] COPY . .                                                                                                                                                                                            0.0s
+ => exporting to image                                                                                                                                                                                        0.0s
+ => => exporting layers                                                                                                                                                                                       0.0s
+ => => writing image sha256:439781f0a7add307bdc2f07701a018e2cd5abe56ff2f6c850134c0025260c980                                                                                                                  0.0s
+ => => naming to docker.io/tfhuhtal/logoutput-hasher:1.101                                                                                                                                                    0.0s
+tuomas@zoe:~/kurssit/kube/log_output$ kubectl delete -f manifests/
+deployment.apps "logoutput-dep" deleted
+ingress.networking.k8s.io "logoutput-ingress" deleted
+service "logoutput-svc" deleted
+tuomas@zoe:~/kurssit/kube/log_output$ v .
+tuomas@zoe:~/kurssit/kube/log_output$ docker push tfhuhtal/logoutput-hasher:1.101
+The push refers to repository [docker.io/tfhuhtal/logoutput-hasher]
+a10dfc88aa2c: Layer already exists
+496938e1a44e: Pushed
+2d73e6b96aa3: Pushed
+1052b457b067: Layer already exists
+6a8f65b6edec: Layer already exists
+b298ceddbfb8: Layer already exists
+44b1b6f4e77e: Layer already exists
+63ca1fbb43ae: Layer already exists
+1.101: digest: sha256:2b08c51995c0754fe8851853bbff9729d7ef0ff6377fc4f78a2598a0cb9d1b2b size: 1988
+tuomas@zoe:~/kurssit/kube/log_output$ kubectl apply -f manifests/
+deployment.apps/logoutput-dep created
+ingress.networking.k8s.io/logoutput-ingress created
+service/logoutput-svc created
+tuomas@zoe:~/kurssit/kube/log_output$ kubectl get pods
+pods                 pods.metrics.k8s.io
+tuomas@zoe:~/kurssit/kube/log_output$ kubectl get pods
+NAME                             READY   STATUS    RESTARTS      AGE
+pingpong-dep-8579d744d4-8df5d    1/1     Running   6 (76m ago)   17d
+logoutput-dep-7bcbdc7658-kdc9k   2/2     Running   0             18s
+tuomas@zoe:~/kurssit/kube/log_output$ curl -L localhost:8081
+2024-09-20T11:11:44.142Z: d54e14b9-48a8-487b-b90a-10a1a516bbe1
+```
+
 # Exercise 1.07 
 
 ```bash
