@@ -1,3 +1,23 @@
+# Exercise 1.12
+
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f manifests/
+persistentvolume/project-pv-meta created
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f project/manifests/
+deployment.apps/project-dep created
+ingress.networking.k8s.io/project-ingress created
+persistentvolumeclaim/project-claim created
+service/project-svc created
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                           READY   STATUS    RESTARTS   AGE
+project-dep-6644cd6ddb-wgzpm   1/1     Running   0          46s
+tuomas@zoe:~/kurssit/kube$ curl -L localhost:8081
+Warning: Binary output can mess up your terminal. Use "--output -" to tell
+Warning: curl to output it to your terminal anyway, or consider "--output
+Warning: <FILE>" to save to a file.
+```
+![My Image](./assets/picture.png)
+
 # Exercise 1.08
 
 ```bash
