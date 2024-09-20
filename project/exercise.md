@@ -1,3 +1,34 @@
+# Exercise 1.13
+
+```bash
+
+tuomas@zoe:~/kurssit/kube$ docker build -t tfhuhtal/project:v0.7 ./project/
+tuomas@zoe:~/kurssit/kube$ docker push tfhuhtal/project:v0.7
+The push refers to repository [docker.io/tfhuhtal/project]
+35ab9b8e0f30: Pushed
+6b70d770b48f: Layer already exists
+a8699d4c5533: Layer already exists
+1052b457b067: Layer already exists
+6a8f65b6edec: Layer already exists
+b298ceddbfb8: Layer already exists
+44b1b6f4e77e: Layer already exists
+63ca1fbb43ae: Layer already exists
+v0.7: digest: sha256:f8b21a61ab113a76e88a83184cf399eca77dec647399efcc9b460b64bc7ea956 size: 1995
+tuomas@zoe:~/kurssit/kube$ v .
+tuomas@zoe:~/kurssit/kube$ kubectl delete -f project/manifests/deployment.yaml
+deployment.apps "project-dep" deleted
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f project/manifests/deployment.yaml
+deployment.apps/project-dep created
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                           READY   STATUS              RESTARTS   AGE
+project-dep-84d7bf6cb7-qcrvf   0/1     ContainerCreating   0          5s
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                           READY   STATUS    RESTARTS   AGE
+project-dep-84d7bf6cb7-qcrvf   1/1     Running   0          53s
+```
+
+![My second image](./assets/picture2.png)
+
 # Exercise 1.12
 
 ```bash

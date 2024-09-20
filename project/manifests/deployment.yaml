@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: project
-          image: tfhuhtal/project:1.12
+          image: tfhuhtal/project:v0.7
           volumeMounts:
             - name: project-volume
               mountPath: /usr/src/app/files
