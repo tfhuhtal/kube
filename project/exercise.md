@@ -1,3 +1,47 @@
+# Exercise 2.02
+![My third image](./assets/picture3.png)
+```bash
+tuomas@zoe:~/kurssit/kube$ docker build -t tfhuhtal/todo-app:v1.05 project/todo-app
+tuomas@zoe:~/kurssit/kube$ docker push tfhuhtal/todo-app:v1.05
+The push refers to repository [docker.io/tfhuhtal/todo-app]
+a12a4200cc24: Pushed
+fc6d7eb830f8: Layer already exists
+ca1f7333bc7f: Layer already exists
+1052b457b067: Layer already exists
+6a8f65b6edec: Layer already exists
+b298ceddbfb8: Layer already exists
+44b1b6f4e77e: Layer already exists
+63ca1fbb43ae: Layer already exists
+v1.05: digest: sha256:5248f76b192b9850649478037fd616d7d29ab9ef105306f8f9cec7abc84f65d6 size: 1996
+tuomas@zoe:~/kurssit/kube$ v .
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f project/manifests/deployment.yaml
+deployment.apps/project-dep configured
+deployment.apps/backend-dep unchanged
+tuomas@zoe:~/kurssit/kube$ kubectl delete -f project/manifests/deployment.yaml
+deployment.apps "project-dep" deleted
+deployment.apps "backend-dep" deleted
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f project/manifests/deployment.yaml
+deployment.apps/project-dep created
+deployment.apps/backend-dep created
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                           READY   STATUS    RESTARTS   AGE
+project-dep-7989df8fd9-mr2qh   1/1     Running   0          77s
+backend-dep-7c96747dff-4vtjr   1/1     Running   0          77s
+tuomas@zoe:~/kurssit/kube$ kubectl get svc,ing,pvc
+NAME                  TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/kubernetes    ClusterIP   10.43.0.1      <none>        443/TCP    31d
+service/project-svc   ClusterIP   10.43.215.11   <none>        2345/TCP   19m
+service/backend-svc   ClusterIP   10.43.13.193   <none>        2345/TCP   19m
+
+NAME                                        CLASS     HOSTS   ADDRESS                            PORTS   AGE
+ingress.networking.k8s.io/project-ingress   traefik   *       172.19.0.2,172.19.0.3,172.19.0.4   80      19m
+
+NAME                                  STATUS   VOLUME            CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/project-claim   Bound    project-pv-meta   1Gi        RWO            project-pv     19m
+tuomas@zoe:~/kurssit/kube$ curl localhost:8081
+<html><head><title>todo-app</title></head><body><img src="cached-image.jpg" style="width: 100px; height: auto;"/><form id="todo-form" action="?" method="POST"><input id="todo-input" type="text" name="title" maxlength="140" required="required"/><button type="submit">Send</button></form><ul><li>Buy groceries</li><li>Walk the dog</li><li>Read a book</li><li>Finish the project report</li><li>wuf wuf</li><li>wuf wuf2</li></ul></body></html>
+```
+
 # Exercise 1.13
 
 ```bash

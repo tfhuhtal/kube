@@ -1,0 +1,12 @@
+html
+  head
+    title= title
+
+  body
+    img(src='cached-image.jpg', style='width: 100px; height: auto;')
+    form#todo-form(action='?', method='POST')
+      input#todo-input(type='text', name='title' maxlength='140', required)
+      button(type='submit') Send
+    ul
+      each todo in todos
+        li= todo.title
