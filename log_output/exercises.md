@@ -1,3 +1,26 @@
+# Exercise 2.01
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                             READY   STATUS    RESTARTS   AGE
+logoutput-dep-7f9c86dd78-rjdj6   2/2     Running   0          5m36s
+pingpong-dep-7746596496-6vxqb    1/1     Running   0          58s
+tuomas@zoe:~/kurssit/kube$ kubectl get ing,svc
+NAME                                          CLASS     HOSTS   ADDRESS                            PORTS   AGE
+ingress.networking.k8s.io/logoutput-ingress   traefik   *       172.19.0.2,172.19.0.3,172.19.0.4   80      99m
+
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/kubernetes      ClusterIP   10.43.0.1       <none>        443/TCP    31d
+service/logoutput-svc   ClusterIP   10.43.1.23      <none>        2345/TCP   99m
+service/pingpong-svc    ClusterIP   10.43.222.251   <none>        2345/TCP   86m
+tuomas@zoe:~/kurssit/kube$ curl localhost:8081
+2024-10-04T10:38:40.080Z: f358e695-7115-4e43-b626-db535275f98c.
+Ping / Pongs: 5tuomas@zoe:~/kurssit/kube$ curl localhost:8081
+2024-10-04T10:38:40.080Z: f358e695-7115-4e43-b626-db535275f98c.
+Ping / Pongs: 6tuomas@zoe:~/kurssit/kube$ curl localhost:8081
+2024-10-04T10:38:45.084Z: 15e5acec-8075-495f-8c9e-c889a4af092e.
+Ping / Pongs: 7
+```
+
 # Exercise 1.11
 
 ```bash
