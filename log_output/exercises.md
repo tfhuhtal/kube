@@ -1,3 +1,18 @@
+# Exercise 2.03
+```bash
+tuomas@zoe:~/kurssit/kube$ kubens
+kube-system
+kube-public
+kube-node-lease
+default
+exercises
+tuomas@zoe:~/kurssit/kube$ kubectl get pods --namespace=exercises
+NAME                             READY   STATUS    RESTARTS   AGE
+pingpong-dep-7746596496-qplsx    1/1     Running   0          7m26s
+logoutput-dep-7f9c86dd78-f9dfs   2/2     Running   0          7m8s
+tuomas@zoe:~/kurssit/kube$
+```
+
 # Exercise 2.01
 ```bash
 tuomas@zoe:~/kurssit/kube$ kubectl get pods
