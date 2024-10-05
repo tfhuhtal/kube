@@ -1,3 +1,29 @@
+# Exercise 2.04
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f manifests/
+persistentvolume/example-pv-meta created
+persistentvolume/project-pv-meta created
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f project/manifests/
+deployment.apps/project-dep created
+deployment.apps/backend-dep created
+ingress.networking.k8s.io/project-ingress created
+persistentvolumeclaim/project-claim created
+service/project-svc created
+service/backend-svc created
+tuomas@zoe:~/kurssit/kube$ kubens
+kube-system
+kube-public
+kube-node-lease
+default
+exercises
+project
+tuomas@zoe:~/kurssit/kube$ kubectl get pods --namespace=project
+NAME                           READY   STATUS    RESTARTS   AGE
+backend-dep-7c96747dff-p876s   1/1     Running   0          31s
+project-dep-7989df8fd9-pskcd   1/1     Running   0          31s
+tuomas@zoe:~/kurssit/kube$
+```
+
 # Exercise 2.02
 ![My third image](./assets/picture3.png)
 ```bash

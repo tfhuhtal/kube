@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: project
   name: project-dep
 spec:
   replicas: 1
@@ -26,6 +27,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: project
   name: backend-dep
 spec:
   replicas: 1
