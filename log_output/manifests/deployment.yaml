@@ -17,12 +17,20 @@ spec:
         - name: logoutput-volume 
           persistentVolumeClaim:
             claimName: image-claim
+        - name: configmap-volume
+          configMap:
+            name: logoutput-configmap
       containers:
         - name: logoutput
-          image: tfhuhtal/logoutput-finder:2.01
+          image: tfhuhtal/logoutput-finder:2.06
+          envFrom:
+            - configMapRef:
+                name: logoutput-configmap
           volumeMounts: 
             - name: logoutput-volume
               mountPath: /usr/src/app/files
+            - name: configmap-volume 
+              mountPath: /usr/src/app/config
         - name: logoutput-hasher
           image: tfhuhtal/logoutput-hasher:1.101
           volumeMounts:

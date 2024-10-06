@@ -11,15 +11,19 @@ const app = express()
 
 app.get('/', async (req, res) => {
   try {
+    const info = fs.readFileSync('config/information.txt', 'utf8')
     const hash = fs.readFileSync('files/log.txt', 'utf8')
     
-    if (!hash) res.status(404).send('No logs found')
+    if (!hash || !info) res.status(404).send('No logs found')
+
+    res.write(`file content: ${info}` + '\n')
+    res.write(`MESSAGE: ${process.env?.MESSAGE}` + '\n')
 
     const pong = await axios.get('http:pingpong-svc:2345/pingpong')
       .then(response => response.data)
       .catch(err => res.status(500).send(err.message))
 
-    res.send(`${hash}. ${pong}`)
+    res.write(`${hash}.` + '\n' + `${pong}`).end()
   } catch (err) {
     res.status(500).send(err.message)
   }

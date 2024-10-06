@@ -1,3 +1,31 @@
+# Exercise 2.06
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f log_output/manifests/
+configmap/logoutput-configmap unchanged
+deployment.apps/logoutput-dep unchanged
+ingress.networking.k8s.io/logoutput-ingress unchanged
+persistentvolumeclaim/image-claim unchanged
+service/logoutput-svc unchanged
+tuomas@zoe:~/kurssit/kube$ kubens
+kube-system
+kube-public
+kube-node-lease
+default
+exercises
+project
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                            READY   STATUS    RESTARTS      AGE
+pingpong-dep-7746596496-5vwjc   1/1     Running   0             16m
+logoutput-dep-5d96fb7cc-b277j   2/2     Running   1 (15s ago)   2m54s
+tuomas@zoe:~/kurssit/kube$ curl localhost:8081
+file content: This text is from a file
+
+MESSAGE: hello world
+2024-10-06T17:38:39.434Z: ea0de556-ee3c-4ac8-9a64-0bbb9d863004.
+
+Ping / Pongs: 8
+```
+
 # Exercise 2.03
 ```bash
 tuomas@zoe:~/kurssit/kube$ kubens
