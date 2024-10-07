@@ -1,3 +1,6 @@
+**/secret.yaml
+**/*/secret.yaml
+
 # Logs
 logs
 *.log
