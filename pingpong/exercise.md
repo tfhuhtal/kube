@@ -1,3 +1,26 @@
+# Exercise 2.07
+```bash
+tuomas@zoe:~/kurssit/kube$ kubens
+kube-system
+kube-public
+kube-node-lease
+default
+exercises
+project
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                            READY   STATUS    RESTARTS       AGE
+my-busybox                      1/1     Running   0              118m
+postgres-set-0                  1/1     Running   0              19m
+pingpong-dep-c5c84557b-ln2mp    1/1     Running   10 (22m ago)   107m
+logoutput-dep-5d96fb7cc-ng9xk   2/2     Running   0              29s
+tuomas@zoe:~/kurssit/kube$ curl localhost:8081
+file content: This text is from a file
+
+MESSAGE: hello world
+2024-10-09T13:23:17.322Z: 817e6e9e-2783-46da-a9b0-61aad9b67a9b.
+
+Ping / Pongs: 4
+```
 # Exercise 1.11
 
 ```bash

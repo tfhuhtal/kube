@@ -1,26 +1,30 @@
 import express from 'express'
-// import fs from 'fs'
-// import path from 'path'
+import { connectToDB, sequelize } from './db.js'
+import { DataTypes } from 'sequelize'
 
 const PORT = 3000
-
-let counter = 0 
-
-// const dir = path.join('/', 'usr', 'src','app', 'files')
-// const filePath = path.join(dir, 'pong.txt')
-
 const app = express()
 
-app.get('/pingpong', (_req, res) => {
-  const value = counter
+app.get('/pingpong', async (_req, res) => {
+  const Pingpong = sequelize.define('Pingpong', {
+    count: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    }
+  })
+  
+  await sequelize.sync({ alter: true })
 
-  /* fs.writeFile(filePath, `Ping / Pongs: ${value}`, (err) => {
-    if (err) res.status(500).send(err.message)
-  }) */
-  res.send(`\nPing / Pongs: ${value}`)
-  counter++
+  let [pong, created] = await Pingpong.findOrCreate({ where: {} })
+  const value = `\nPing / Pongs: ${pong.count}`
+
+  pong.increment({ count: 1 })
+  
+  res.status(200).send(value)
 })
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await connectToDB()
   console.log(`Server is running on port ${PORT}`)
 })
