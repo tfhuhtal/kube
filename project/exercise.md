@@ -1,3 +1,22 @@
+# Exercise 2.08
+```bash
+tuomas@zoe:~/kurssit/kube/project$ kubens
+kube-system
+kube-public
+kube-node-lease
+default
+exercises
+project
+tuomas@zoe:~/kurssit/kube/project$ kubectl get pods
+NAME                           READY   STATUS    RESTARTS        AGE
+postgres-set-0                 1/1     Running   0               27m
+backend-dep-6b649987cc-ch54d   1/1     Running   4 (8m51s ago)   27m
+project-dep-7d4cdc4f46-lrtn6   1/1     Running   3 (8m51s ago)   11m
+tuomas@zoe:~/kurssit/kube/project$ curl -l localhost:8081
+<html><head><title>todo-app</title></head><body><img src="cached-image.jpg" style="width: 100px; height: auto;"/><form id="todo-form" action="?" method="POST"><input id="todo-input" type="text" name="title" maxlength="140" required="required"/><button type="submit">Send</button></form><ul><li>Buy groceries</li><li>Walk the dog</li><li>Read a book</li><li>Finish the project report</li><li>Moi</li></ul></body></html>
+```
+- The last li with moi is posted on database using this form, (it is not included in seeding)
+
 # Exercise 2.04
 ```bash
 tuomas@zoe:~/kurssit/kube$ kubectl apply -f manifests/

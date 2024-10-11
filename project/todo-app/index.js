@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import express from 'express'
+import express, { response } from 'express'
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
@@ -46,17 +46,9 @@ app.set('views', './views')
 app.set('view engine', 'pug')
 
 app.get('/', checkCache, async (req, res) => {
-
-  const todos = await axios.get('http://backend-svc:2345/todos')
-    .then(response => { 
-      console.log(response)
-
-      return response.data
-    })
-    .catch(err => console.error(err))
-  
-  console.log(todos)
-
+  let todos = []
+  const response = await axios.get('http://backend-svc:2345/todos')
+  if (Array.isArray(response.data)) todos = response.data
   res.render('index', { title: 'todo-app', todos })
 })
 
