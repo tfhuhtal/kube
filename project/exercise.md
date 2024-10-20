@@ -1,3 +1,25 @@
+# Exercise 2.09
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f project/manifests/todocron.yaml
+cronjob.batch/todo-cron configured
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                           READY   STATUS      RESTARTS       AGE
+postgres-set-0                 1/1     Running     4 (117m ago)   9d
+project-dep-7d4cdc4f46-ts486   1/1     Running     0              44m
+backend-dep-6b649987cc-wlbfg   1/1     Running     0              44m
+my-busybox                     1/1     Running     0              12m
+todo-cron-28823640-xk8n6       0/1     Completed   0              2m53s
+todo-cron-manual-xcuad-jq92g   0/1     Completed   0              63s
+todo-cron-manual-us0w5-zfvlx   0/1     Completed   0              33s
+tuomas@zoe:~/kurssit/kube$ kubectl get jobs
+NAME                     COMPLETIONS   DURATION   AGE
+todo-cron-28823640       1/1           6s         3m3s
+todo-cron-manual-xcuad   1/1           7s         73s
+todo-cron-manual-us0w5   1/1           8s         43s
+tuomas@zoe:~/kurssit/kube$ kubectl logs todo-cron-manual-us0w5-zfvlx
+{"message":"Todo created"}created todo Read https://en.wikipedia.org/wiki/Rhamnulokinase
+```
+
 # Exercise 2.08
 ```bash
 tuomas@zoe:~/kurssit/kube/project$ kubens
