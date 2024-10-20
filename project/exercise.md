@@ -1,3 +1,29 @@
+# Exercise 2.10
+![My fourth image](./assets/picture4.png)
+
+```bash
+tuomas@zoe:~/kurssit/kube/project$ kubectl get pods -o wide
+NAME                           READY   STATUS      RESTARTS       AGE    IP            NODE                       NOMINATED NODE   READINESS GATES
+postgres-set-0                 1/1     Running     4 (4h8m ago)   9d     10.42.1.84    k3d-k3s-default-agent-1    <none>           <none>
+project-dep-7d4cdc4f46-ts486   1/1     Running     0              175m   10.42.0.120   k3d-k3s-default-agent-0    <none>           <none>
+todo-cron-manual-us0w5-zfvlx   0/1     Completed   0              131m   10.42.1.89    k3d-k3s-default-agent-1    <none>           <none>
+todo-cron-28823700-nbrrh       0/1     Completed   0              73m    10.42.0.124   k3d-k3s-default-agent-0    <none>           <none>
+my-busybox                     1/1     Running     2 (23m ago)    143m   10.42.2.100   k3d-k3s-default-server-0   <none>           <none>
+todo-cron-28823760-9rq7s       0/1     Completed   0              13m    10.42.0.127   k3d-k3s-default-agent-0    <none>           <none>
+backend-dep-859bfcddc8-58tc5   1/1     Running     0              8m6s   10.42.0.128   k3d-k3s-default-agent-0    <none>           <none>
+tuomas@zoe:~/kurssit/kube/project$ curl -X POST http://localhost:8080/todos -H "Content-Type: application/json" -d '{
+  "title": "This is a sample todo item that exceeds the 140 character limit. It is designed to test the backend functionality for handling long text inputs, ensuring that the system can process and store lengthy todo items without any issues."
+}'
+{"errors":[{"title":"Title is too long, the limit is 140 chars"}]}
+```
+Also I am port-forwarding backend-svc
+```bash
+tuomas@zoe:~$ kubectl port-forward service/backend-svc 8080:2345
+Forwarding from 127.0.0.1:8080 -> 3001
+Forwarding from [::1]:8080 -> 3001
+Handling connection for 8080
+```
+
 # Exercise 2.09
 ```bash
 tuomas@zoe:~/kurssit/kube$ kubectl apply -f project/manifests/todocron.yaml

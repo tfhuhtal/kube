@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: tfhuhtal/todo-backend:v1.2
+          image: tfhuhtal/todo-backend:v1.3
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
