@@ -1,3 +1,55 @@
+# Exercise 3.01
+
+```bash
+tuomas@zoe:~/kurssit/kube$ gcloud container clusters create dwk-cluster --zone=europe-north1-b --cluster-version=1.31
+Note: The Kubelet readonly port (10255) is now deprecated. Please update your workloads to use the recommended alternatives. See https://cloud.google.com/kubernetes-engine/docs/how-to/disable-kubelet-readonly-port for ways to check usage and for migration instructions.
+Note: Your Pod address range (`--cluster-ipv4-cidr`) can accommodate at most 1008 node(s).
+Creating cluster dwk-cluster in europe-north1-b... Cluster is being health-checked (Kubernetes Control P
+lane is healthy)...done.
+Created [https://container.googleapis.com/v1/projects/skilful-alpha-441414-r8/zones/europe-north1-b/clusters/dwk-cluster].
+To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/europe-north1-b/dwk-cluster?project=skilful-alpha-441414-r8
+kubeconfig entry generated for dwk-cluster.
+NAME         LOCATION         MASTER_VERSION      MASTER_IP       MACHINE_TYPE  NODE_VERSION        NUM_NODES  STATUS
+dwk-cluster  europe-north1-b  1.31.1-gke.1846000  35.228.220.236  e2-medium     1.31.1-gke.1846000  3          RUNNING
+tuomas@zoe:~/kurssit/kube$ kubens
+default
+gke-managed-cim
+gke-managed-system
+gke-managed-volumepopulator
+gmp-public
+gmp-system
+kube-node-lease
+kube-public
+kube-system
+tuomas@zoe:~/kurssit/kube$ kubectl create namespace exercises
+namespace/exercises created
+tuomas@zoe:~/kurssit/kube$ kubens exercises
+Context "gke_skilful-alpha-441414-r8_europe-north1-b_dwk-cluster" modified.
+Active namespace is "exercises".
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+No resources found in exercises namespace.
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f pingpong/manifests/postgres.yaml
+service/postgres-svc created
+statefulset.apps/postgres-set created
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f pingpong/manifests/secret.yaml
+secret/postgres-secret created
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f pingpong/manifests/deployment.yaml
+deployment.apps/pingpong-dep created
+tuomas@zoe:~/kurssit/kube$ v .
+tuomas@zoe:~/kurssit/kube$ kubectl apply -f pingpong/manifests/service.yaml
+service/pingpong-svc created
+tuomas@zoe:~/kurssit/kube$ kubectl get svc
+NAME           TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        AGE
+pingpong-svc   LoadBalancer   34.118.232.102   35.228.80.104   80:31361/TCP   51s
+postgres-svc   ClusterIP      None             <none>          5432/TCP       89s
+tuomas@zoe:~/kurssit/kube$ curl http://35.228.80.104/pingpong
+
+Ping / Pongs: 0tuomas@zoe:~/kurssit/kube$ curl http://35.228.80.104/pingpong
+
+Ping / Pongs: 1tuomas@zoe:~/kurssit/kube$ curl http://35.228.80.104/pingpong
+
+Ping / Pongs: 2
+
 # Exercise 2.07
 ```bash
 tuomas@zoe:~/kurssit/kube$ kubens
