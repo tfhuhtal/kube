@@ -1,3 +1,24 @@
+# Exercise 3.02
+
+```bash
+
+tuomas@zoe:~/kurssit/kube$ kubectl get ing
+NAME                CLASS    HOSTS   ADDRESS       PORTS   AGE
+logoutput-ingress   <none>   *       34.8.167.43   80      25m
+tuomas@zoe:~/kurssit/kube$ curl http://34.8.167.43/
+file content: This text is from a file
+
+MESSAGE: hello world
+2024-11-11T16:45:16.609Z: e4812d9b-de75-43f5-96dd-b64dfcba5cef.
+
+Ping / Pongs: 63tuomas@zoe:~/kurssit/kube$ v .
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                             READY   STATUS    RESTARTS   AGE
+logoutput-dep-649bdb8869-rhv6l   2/2     Running   0          116s
+pingpong-dep-7698b469db-6b99v    1/1     Running   0          53m
+postgres-set-0                   1/1     Running   0          65m
+```
+
 # Exercise 2.06
 ```bash
 tuomas@zoe:~/kurssit/kube$ kubectl apply -f log_output/manifests/

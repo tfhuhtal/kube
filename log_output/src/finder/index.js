@@ -1,11 +1,9 @@
 import fs from 'fs'
 import express from 'express'
-import * as dotenv from 'dotenv'
 import axios from 'axios'
+import path from 'path'
 
-dotenv.config()
-
-const PORT = process.env.PORT || 3000
+const PORT = 3000
 
 const app = express()
 
@@ -16,14 +14,12 @@ app.get('/', async (req, res) => {
     
     if (!hash || !info) res.status(404).send('No logs found')
 
-    res.write(`file content: ${info}` + '\n')
-    res.write(`MESSAGE: ${process.env?.MESSAGE}` + '\n')
-
-    const pong = await axios.get('http:pingpong-svc:2345/pingpong')
+    const pong = await axios.get('http://pingpong-svc:80/pingpong')
       .then(response => response.data)
       .catch(err => res.status(500).send(err.message))
 
-    res.write(`${hash}.` + '\n' + `${pong}`).end()
+    const responseText = `file content: ${info}\nMESSAGE: ${process.env?.MESSAGE}\n${hash}.\n${pong}`
+    res.send(responseText)
   } catch (err) {
     res.status(500).send(err.message)
   }

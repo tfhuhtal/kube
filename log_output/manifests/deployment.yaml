@@ -22,7 +22,7 @@ spec:
             name: logoutput-configmap
       containers:
         - name: logoutput
-          image: tfhuhtal/logoutput-finder:2.06
+          image: tfhuhtal/logoutput-finder:3.023
           envFrom:
             - configMapRef:
                 name: logoutput-configmap
