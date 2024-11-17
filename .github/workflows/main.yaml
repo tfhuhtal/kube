@@ -49,7 +49,7 @@ jobs:
           curl -LO https://github.com/getsops/sops/releases/download/v3.9.0/sops_3.9.0_amd64.deb
           sudo dpkg -i sops_3.9.0_amd64.deb
           export SOPS_AGE_KEY=${{ secrets.SOPS_AGE_KEY }}
-          sops --decrypt project/manifests/secret.enc.yaml > project/manifests/secret.yaml
+          sops --decrypt ./manifests/secret.enc.yaml > ./manifests/secret.yaml
 
       - name: Build
         run: |-
