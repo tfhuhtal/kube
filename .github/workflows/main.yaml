@@ -16,9 +16,6 @@ jobs:
   build-publish-deploy:
     name: Build, Publish and Deploy 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: project
 
     steps:
       - name: Checkout
