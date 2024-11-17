@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Testing
+        run: echo '${{ secrets.SAATANA }}'
 
       - uses: google-github-actions/auth@v2
         with:
