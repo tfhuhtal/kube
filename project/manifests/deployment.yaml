@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: project
-          image: tfhuhtal/todo-app:v1.2-1
+          image: FRONTEND_IMAGE
           volumeMounts:
             - name: project-volume
               mountPath: /usr/src/app/files
@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: tfhuhtal/todo-backend:v1.3
+          image: BACKEND_IMAGE
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
