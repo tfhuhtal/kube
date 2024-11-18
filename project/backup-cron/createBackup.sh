@@ -1,9 +1,8 @@
 #!/bin/sh
-
 BACKUP_PATH="/tmp/backup-$(date +\%Y-\%m-\%d).sql"
 
-PGPASSWORD=$POSTGRES_PASSWORD pg_dump --host=postgres-svc --username=postgres --file=$BACKUP_PATH --format=custom
+PGPASSWORD=$POSTGRES_PASSWORD pg_dump --host=postgres-db-svc --username=postgres --file=$BACKUP_PATH --format=custom
 
-gsutil cp $BACKUP_PATH gs://project-db-backup
+gsutil cp $BACKUP_PATH gs://project-db-backup 
 
 rm $BACKUP_PATH

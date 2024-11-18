@@ -1,3 +1,26 @@
+# Exercise 3.07
+
+made cronjob script and yaml files for backup cronjob 
+
+and then ran these commands
+
+```bash
+
+tuomas@zoe:~/kurssit/kube$ gcloud iam service-accounts create backup-sa --display-name "Backup Service Account"
+Created service account [backup-sa].
+
+tuomas@zoe:~/kurssit/kube$ gcloud projects add-iam-policy-binding PROJECT_ID \
+--member "serviceAccount:backup-sa@PROJECT_ID.iam.gserviceaccount.com" \
+--role "roles/storage.objectAdmin"
+```
+then I ran git commands to publish the new cronjob
+
+and then I ran
+
+```bash
+
+```
+
 # Exercise 3.06
 
 Check the readme
