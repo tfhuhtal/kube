@@ -4,7 +4,7 @@ metadata:
   name: project-claim # name of ther volume claim, this will be used in the deployment
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
