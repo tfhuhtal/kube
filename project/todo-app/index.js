@@ -7,7 +7,7 @@ import cors from 'cors'
 
 dotenv.config()
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 const dir = path.join('/', 'usr', 'src', 'app', 'files')
 const IMAGE_PATH = path.join(dir, 'cached-image.jpg')
 const CACHE_DURATION = 60 * 60 * 1000 // 60 minutes in milliseconds
