@@ -12,6 +12,12 @@ spec:
           containers:
           - name: pg-backup
             image: PG_BACKUP_IMAGE
+            env:
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-secret
+                    key: POSTGRES_PASSWORD
           restartPolicy: OnFailure
 ---
 
