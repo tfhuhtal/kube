@@ -1,3 +1,34 @@
+# Exercise 3.03 && 3.04
+
+```bash
+
+Run kubectl get namespace $***NAMESPACE*** || kubectl create namespace $***NAMESPACE***
+NAME      STATUS   AGE
+default   Active   6m2s
+Context "gke_***_europe-north1-b_dwk-cluster" modified.
+secret/postgres-secret created
+service/backend-svc created
+service/postgres-db-svc created
+service/project-svc created
+persistentvolumeclaim/project-claim created
+deployment.apps/backend-dep created
+deployment.apps/project-dep created
+statefulset.apps/postgres-set created
+cronjob.batch/todo-cron created
+ingress.networking.k8s.io/project-ingress created
+Waiting for deployment "backend-dep" rollout to finish: 0 of 1 updated replicas are available...
+deployment "backend-dep" successfully rolled out
+Waiting for deployment "project-dep" rollout to finish: 0 of 1 updated replicas are available...
+deployment "project-dep" successfully rolled out
+NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE     SELECTOR
+backend-svc       NodePort    34.118.225.222   <none>        2345:32558/TCP   21s     app=backend
+kubernetes        ClusterIP   34.118.224.1     <none>        443/TCP          6m22s   <none>
+postgres-db-svc   ClusterIP   None             <none>        5432/TCP         21s     app=postgres
+project-svc       NodePort    34.118.238.143   <none>        2345:31018/TCP   20s     app=project
+```
+
+pasted from gha
+
 # Exercise 2.10
 ![My fourth image](./assets/picture4.png)
 
