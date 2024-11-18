@@ -10,7 +10,7 @@ resources:
   - manifests/service.yaml
   - manifests/ingress.yaml
   - manifests/todocron.yaml
-  - manifests/secret.enc.yaml
+  - manifests/secret.yaml
 
 images:
   - name: FRONTEND_IMAGE
