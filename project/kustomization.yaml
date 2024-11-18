@@ -9,6 +9,7 @@ resources:
   - manifests/ingress.yaml
   - manifests/todocron.yaml
   - manifests/secret.yaml
+  - manifests/backupcron.yaml
 
 images:
   - name: FRONTEND_IMAGE
@@ -17,4 +18,5 @@ images:
     newName: tfhuhtal/todo-backend:v1.3
   - name: CRONJOB_IMAGE
     newName: tfhuhtal/todo-cron:2.092
+  - name: PG_BACKUP_IMAGE
 

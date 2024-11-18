@@ -1,0 +1,17 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pg-backup
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pg-backup
+            image: PG_BACKUP_IMAGE
+          restartPolicy: OnFailure
+---
+
