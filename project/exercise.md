@@ -1,4 +1,17 @@
-# Exercise 3.03 && 3.04
+# Exercise 3.06
+
+Check the readme
+
+# Exercise 3.05
+
+I added branch testing and then deleted it 
+
+```bash
+tuomas@zoe:~/kurssit/kube$ curl -L http://34.36.246.152
+<html><head><title>todo-app</title></head><body><img src="cached-image.jpg" style="width: 100px; height: auto;"/><form id="todo-form" action="?" method="POST"><input id="todo-input" type="text" name="title" maxlength="140" required="required"/><button type="submit">Send</button></form><ul><li>Buy groceries</li><li>Walk the dog</li><li>Read a book</li><li>Finish the project report</li><li>Read https://en.wikipedia.org/wiki/Pulmonoscorpius</li></ul></body></html>t
+```
+
+# Exercise 3.03 && 3.05
 
 ```bash
 
