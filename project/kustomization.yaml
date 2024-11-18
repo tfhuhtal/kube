@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: project
 
 resources:
-  - ./namespace.yaml
   - manifests/deployment.yaml
   - manifests/postgres.yaml
   - manifests/persistentvolumeclaim.yaml
