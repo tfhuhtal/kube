@@ -1,3 +1,7 @@
+# Exercise 3.10
+
+![Logs](./assets/GKE_LOGS.png)
+
 # Exercise 3.08
 
 Set the limits to 150m cpu and 100Mi memory
