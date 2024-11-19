@@ -1,24 +1,54 @@
 # Exercise 3.07
 
-made cronjob script and yaml files for backup cronjob 
+made cronjob script and yaml files for backup cronjob also I added serviceAccountName to backupcronjob.yaml file
 
 and then ran these commands
 
 ```bash
 
-tuomas@zoe:~/kurssit/kube$ gcloud iam service-accounts create backup-sa --display-name "Backup Service Account"
-Created service account [backup-sa].
+tuomas@zoe:~/kurssit/kube$ kubectl create serviceaccount github-actions --namespace default
+serviceaccount/github-actions created
 
-tuomas@zoe:~/kurssit/kube$ gcloud projects add-iam-policy-binding PROJECT_ID \
---member "serviceAccount:backup-sa@PROJECT_ID.iam.gserviceaccount.com" \
---role "roles/storage.objectAdmin"
+tuomas@zoe:~/kurssit/kube$ kubectl get serviceaccounts
+NAME             SECRETS   AGE
+default          0         22m
+github-actions   0         16m
+
+tuomas@zoe:~/kurssit/kube$ gcloud iam service-accounts add-iam-policy-binding \
+  github-actions@PROJECT_ID.iam.gserviceaccount.com \
+  --member="serviceAccount:PROJECT_ID.svc.id.goog[default/github-actions]" \
+  --role="roles/iam.workloadIdentityUser"
+Updated IAM policy for serviceAccount [github-actions@PROJECT_ID.iam.gserviceaccount.com].
+bindings:
+- members:
+  - serviceAccount:PROJECT_ID.svc.id.goog[default/github-actions]
+  role: roles/iam.workloadIdentityUser
+etag: BwYnQAWzYuI=
+version: 1
+tuomas@zoe:~/kurssit/kube$ kubectl annotate serviceaccount github-actions --namespace default iam.gke.io/gcp-service-account=github-actions@PROJECT_ID.iam.gserviceaccount.com
+serviceaccount/github-actions annotated
+
+tuomas@zoe:~/kurssit/kube$ gcloud container node-pools list --cluster=dwk-cluster --zone=europe-north1-b
+NAME          MACHINE_TYPE  DISK_SIZE_GB  NODE_VERSION
+default-pool  e2-medium     100           1.29.9-gke.1496000
+
+tuomas@zoe:~/kurssit/kube$ gcloud container node-pools update default-pool --cluster=dwk-cluster --zone=europe-north1-b --workload-metadata=GKE_METADATA
+Updating node pool default-pool... Updating default-pool, done with 2 out of 3 nodes (66.7%): 1 being processed, 2 succeeded...done.
+Updated [https://container.googleapis.com/v1/projects/PROJECT_ID/zones/europe-north1-b/clusters/dwk-cluster/nodePools/default-pool].
 ```
-then I ran git commands to publish the new cronjob
-
-and then I ran
+Then I manually triggered the cronjob from lens
 
 ```bash
+tuomas@zoe:~/kurssit/kube$ kubectl get po
+NAME                           READY   STATUS      RESTARTS      AGE
+backend-dep-6c599db55c-9cd64   1/1     Running     2 (21m ago)   42m
+pg-backup-manual-5c7mg-8c7n8   0/1     Completed   0             2m4s
+postgres-set-0                 1/1     Running     0             42m
+project-dep-5d89894f8-5g7p9    1/1     Running     1 (21m ago)   42m
+todo-cron-28866780-swcz2       0/1     Completed   0             36m
 
+tuomas@zoe:~/kurssit/kube$ gsutil ls gs://postgres-backup-tfhuhtal
+gs://postgres-backup-tfhuhtal/backup-2024-11-19.sql
 ```
 
 # Exercise 3.06
