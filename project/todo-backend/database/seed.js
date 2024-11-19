@@ -9,6 +9,9 @@ const todos = [
 
 const seed = async () => {
   await Todo.bulkCreate(todos, { ignoreDuplicates: true })
+
+  // Reset the sequence for the id column
+  await sequelize.query(`SELECT setval('Todos_id_seq', (SELECT MAX(id) FROM "Todos"))`)
 }
 
 export default seed
