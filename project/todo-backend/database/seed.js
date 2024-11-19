@@ -1,4 +1,5 @@
 import Todo from './models/Todo.js'
+import { sequelize } from './connection.js'
 
 const todos = [
   { id: 1, title: 'Buy groceries' },

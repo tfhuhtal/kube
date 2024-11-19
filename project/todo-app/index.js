@@ -24,6 +24,7 @@ const fetchAndCacheImage = async () => {
   const response = await axios.get('https://picsum.photos/1200', { responseType: 'arraybuffer' })
   const buffer = Buffer.from(response.data, 'binary')
   fs.writeFileSync(IMAGE_PATH, buffer)
+  console.log(`Image fetched and saved to ${IMAGE_PATH}`)
 }
 
 const checkCache = (req, res, next) => {
@@ -31,8 +32,10 @@ const checkCache = (req, res, next) => {
     const now = Date.now()
 
     if (err || now - stats.mtimeMs > CACHE_DURATION) {
+      console.log('Cached image not found or expired. Fetching new image...')
       fetchAndCacheImage().then(() => next()).catch(next)
     } else {
+      console.log('Cached image found.')
       next()
     }
   })
