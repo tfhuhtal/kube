@@ -16,6 +16,10 @@ spec:
       containers:
         - name: pingpong
           image: tfhuhtal/pingpong:2.072
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

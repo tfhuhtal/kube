@@ -1,3 +1,7 @@
+# Exercise 3.09
+
+New resource limits are cpu 150m and memory 100Mi 
+
 # Exercise 3.01
 
 ```bash

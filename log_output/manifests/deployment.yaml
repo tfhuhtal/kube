@@ -23,6 +23,10 @@ spec:
       containers:
         - name: logoutput
           image: tfhuhtal/logoutput-finder:3.023
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           envFrom:
             - configMapRef:
                 name: logoutput-configmap
