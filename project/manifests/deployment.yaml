@@ -15,6 +15,10 @@ spec:
       containers:
         - name: project
           image: FRONTEND_IMAGE
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           volumeMounts:
             - name: project-volume
               mountPath: /usr/src/app/files
@@ -40,6 +44,10 @@ spec:
       containers:
         - name: backend
           image: BACKEND_IMAGE
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

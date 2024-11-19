@@ -43,6 +43,10 @@ spec:
             - name: postgres-data-storage
               mountPath: /var/lib/postgresql/data
               subPath: postgres
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
 
   volumeClaimTemplates:
     - metadata:

@@ -1,3 +1,7 @@
+# Exercise 3.08
+
+Set the limits to 150m cpu and 100Mi memory
+
 # Exercise 3.07
 
 made cronjob script and yaml files for backup cronjob also I added serviceAccountName to backupcronjob.yaml file
