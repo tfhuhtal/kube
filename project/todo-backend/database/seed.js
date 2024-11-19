@@ -11,8 +11,15 @@ const todos = [
 const seed = async () => {
   await Todo.bulkCreate(todos, { ignoreDuplicates: true })
 
+  // Fetch the sequence name dynamically
+  const result = await sequelize.query(`
+    SELECT pg_get_serial_sequence('"Todos"', 'id') as sequence_name
+  `, { type: sequelize.QueryTypes.SELECT })
+
+  const sequenceName = result[0].sequence_name
+
   // Reset the sequence for the id column
-  await sequelize.query(`SELECT setval('Todos_id_seq', (SELECT MAX(id) FROM "Todos"))`)
+  await sequelize.query(`SELECT setval('${sequenceName}', (SELECT MAX(id) FROM "Todos"))`)
 }
 
 export default seed
