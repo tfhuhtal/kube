@@ -28,8 +28,10 @@ app.post('/todos', async (req, res) => {
     return res.status(400).json({ errors })
   }
   const { title } = todo
+  
+  const id = Math.random()
 
-  await Todo.create({ title })
+  await Todo.create({ id, title })
 
   logger.info('Todo created', { title })
   res.status(201).json({ message: 'Todo created' })
