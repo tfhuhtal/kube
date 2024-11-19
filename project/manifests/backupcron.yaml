@@ -9,6 +9,7 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: github-actions
           containers:
           - name: pg-backup
             image: PG_BACKUP_IMAGE
