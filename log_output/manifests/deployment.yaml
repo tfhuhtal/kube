@@ -22,7 +22,14 @@ spec:
             name: logoutput-configmap
       containers:
         - name: logoutput
-          image: tfhuhtal/logoutput-finder:3.023
+          image: tfhuhtal/logoutput-finder:4.1
+          imagePullPolicy: Always
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /health
+              port: 3000
           resources:
             limits:
               cpu: "150m"
