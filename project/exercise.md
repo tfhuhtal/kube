@@ -1,3 +1,32 @@
+# Exercise 4.02
+
+```bash
+tuomas@zoe:~/kurssit/kube/project$ kubectl apply -k .
+secret/postgres-secret unchanged
+service/backend-svc configured
+service/postgres-db-svc unchanged
+service/project-svc configured
+deployment.apps/backend-dep created
+deployment.apps/project-dep created
+cronjob.batch/pg-backup created
+cronjob.batch/todo-cron configured
+ingress.networking.k8s.io/project-ingress configured
+
+tuomas@zoe:~/kurssit/kube/project$ kubectl get ing
+NAME              CLASS   HOSTS   ADDRESS                            PORTS   AGE
+project-ingress   nginx   *       172.19.0.2,172.19.0.3,172.19.0.4   80      76d
+
+tuomas@zoe:~/kurssit/kube/project$ kubectl get po
+NAME                           READY   STATUS      RESTARTS       AGE
+my-busybox                     1/1     Running     91 (36m ago)   61d
+postgres-set-0                 1/1     Running     25 (35m ago)   70d
+todo-cron-28912020-8bzl4       0/1     Completed   0              84m
+todo-cron-28904340-x2jjn       0/1     Completed   0              5d9h
+todo-cron-28912080-cm87r       0/1     Completed   0              27m
+project-dep-765bb84fc5-x2k2w   1/1     Running     0              45s
+backend-dep-6b76c6bfdf-z5lj2   1/1     Running     0              45s
+```
+
 # Exercise 3.10
 
 ![Logs](./assets/GKE_LOGS.png)

@@ -44,6 +44,14 @@ spec:
       containers:
         - name: backend
           image: BACKEND_IMAGE
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3001
           resources:
             limits:
               cpu: "150m"
