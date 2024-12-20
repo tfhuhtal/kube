@@ -12,7 +12,7 @@ export const sequelize = new Sequelize(
   }
 )
 
-export const testConnection = async () => {
+const testConnection = async () => {
   await sequelize.authenticate()
 }
 

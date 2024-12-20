@@ -1,20 +1,3 @@
-# Exercise 4.01
-
-```bash
-tuomas@zoe:~/kurssit/kube$ kubectl get pods
-NAME                            READY   STATUS    RESTARTS          AGE
-my-busybox                      1/1     Running   112 (4m17s ago)   72d
-postgres-set-0                  1/1     Running   1 (4m7s ago)      6m44s
-pingpong-dep-6bbdf5fb85-lqgzz   1/1     Running   0                 6m44s
-logoutput-dep-97b5cb7ff-mpcs2   2/2     Running   0                 2m34s
-
-tuomas@zoe:~/kurssit/kube$ kubectl get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].name}{"\t"}{.spec.containers[*].readinessProbe}{"\n"}{end}'
-my-busybox      busybox
-postgres-set-0  postgres
-pingpong-dep-6bbdf5fb85-lqgzz   pingpong        {"failureThreshold":3,"httpGet":{"path":"/health","port":3000,"scheme":"HTTP"},"initialDelaySeconds":5,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":1}
-logoutput-dep-97b5cb7ff-mpcs2   logoutput logoutput-hasher      {"failureThreshold":3,"httpGet":{"path":"/health","port":3000,"scheme":"HTTP"},"initialDelaySeconds":5,"periodSeconds":5,"successThreshold":1,"timeoutSeconds":1}
-```
-
 # Exercise 3.09
 
 New resource limits are cpu 150m and memory 100Mi 

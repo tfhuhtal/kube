@@ -25,12 +25,6 @@ app.get('/', async (req, res) => {
   }
 })
 
-app.get('/health', async (_req, res) => {
-  await axios.get('http://pingpong-svc:80/health')
-  .then(() => res.status(200).send('Healthy'))
-  .catch(() => res.status(500).send('Unhealthy'))
-})
-
 app.listen(PORT, () =>{
   console.log(`Server is listening port ${PORT}`)
 })

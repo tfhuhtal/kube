@@ -1,18 +1,9 @@
 import express from 'express'
-import { connectToDB, sequelize, testConnection } from './db.js'
+import { connectToDB, sequelize } from './db.js'
 import { DataTypes } from 'sequelize'
 
 const PORT = 3000
 const app = express()
-
-app.get('/health', async (_req, res) => {
-  try { 
-    await testConnection()
-    res.status(200).send('Healthy')
-  } catch (error) {
-    res.status(500).send('Unhealthy')
-  }
-})
 
 app.get('/pingpong', async (_req, res) => {
   const Pingpong = sequelize.define('Pingpong', {
@@ -22,14 +13,14 @@ app.get('/pingpong', async (_req, res) => {
       defaultValue: 0,
     }
   })
-
+  
   await sequelize.sync({ alter: true })
 
   let [pong, created] = await Pingpong.findOrCreate({ where: {} })
   const value = `\nPing / Pongs: ${pong.count}`
 
   pong.increment({ count: 1 })
-
+  
   res.status(200).send(value)
 })
 
