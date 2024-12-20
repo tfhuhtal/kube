@@ -15,7 +15,13 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: tfhuhtal/pingpong:2.072
+          image: tfhuhtal/pingpong:4.1
+          readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              path: /health
+              port: 3000
           resources:
             limits:
               cpu: "150m"
