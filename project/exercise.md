@@ -1,5 +1,5 @@
 # Exercise 4.03
-
+Installed the prometheus like instructed
 ```bash
 tuomas@zoe:~/kurssit/kube/project$ kubectl -n prometheus port-forward prometheus-kube-prometheus-stack-1729-prometheus-0 9090:9090
 Forwarding from 127.0.0.1:9090 -> 9090
