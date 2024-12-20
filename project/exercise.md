@@ -1,3 +1,17 @@
+# Exercise 4.03
+
+```bash
+tuomas@zoe:~/kurssit/kube/project$ kubectl -n prometheus port-forward prometheus-kube-prometheus-stack-1729-prometheus-0 9090:9090
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+
+```
+
+![query](./assets/query.png)
+
 # Exercise 4.02
 
 ```bash
