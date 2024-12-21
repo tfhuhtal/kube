@@ -10,6 +10,8 @@ resources:
   - manifests/todocron.yaml
   - manifests/secret.yaml
   - manifests/backupcron.yaml
+  - manifests/analysistemplate.yaml
+  - manifests/rollout.yaml
 
 images:
   - name: FRONTEND_IMAGE

@@ -1,3 +1,62 @@
+# Exercise 4.04
+
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl create namespace argo-rollouts
+namespace/argo-rollouts created
+tuomas@zoe:~/kurssit/kube$ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+customresourcedefinition.apiextensions.k8s.io/analysisruns.argoproj.io created
+customresourcedefinition.apiextensions.k8s.io/analysistemplates.argoproj.io created
+customresourcedefinition.apiextensions.k8s.io/clusteranalysistemplates.argoproj.io created
+customresourcedefinition.apiextensions.k8s.io/experiments.argoproj.io created
+customresourcedefinition.apiextensions.k8s.io/rollouts.argoproj.io created
+serviceaccount/argo-rollouts created
+clusterrole.rbac.authorization.k8s.io/argo-rollouts created
+clusterrole.rbac.authorization.k8s.io/argo-rollouts-aggregate-to-admin created
+clusterrole.rbac.authorization.k8s.io/argo-rollouts-aggregate-to-edit created
+clusterrole.rbac.authorization.k8s.io/argo-rollouts-aggregate-to-view created
+clusterrolebinding.rbac.authorization.k8s.io/argo-rollouts created
+configmap/argo-rollouts-config created
+secret/argo-rollouts-notification-secret created
+service/argo-rollouts-metrics created
+deployment.apps/argo-rollouts created
+
+tuomas@zoe:~/kurssit/kube$ kubectl delete -k project/
+secret "postgres-secret" deleted
+service "backend-svc" deleted
+service "postgres-db-svc" deleted
+service "project-svc" deleted
+persistentvolumeclaim "project-claim" deleted
+deployment.apps "backend-dep" deleted
+deployment.apps "project-dep" deleted
+statefulset.apps "postgres-set" deleted
+cronjob.batch "pg-backup" deleted
+cronjob.batch "todo-cron" deleted
+ingress.networking.k8s.io "project-ingress" deleted
+
+tuomas@zoe:~/kurssit/kube$ kubectl apply -k project/
+secret/postgres-secret created
+service/backend-svc created
+service/postgres-db-svc created
+service/project-svc created
+persistentvolumeclaim/project-claim created
+deployment.apps/backend-dep created
+deployment.apps/project-dep created
+statefulset.apps/postgres-set created
+cronjob.batch/pg-backup created
+cronjob.batch/todo-cron created
+analysistemplate.argoproj.io/cpu-usage created
+rollout.argoproj.io/backend-dep created
+ingress.networking.k8s.io/project-ingress created
+
+tuomas@zoe:~/kurssit/kube$ kubectl get pods
+NAME                           READY   STATUS    RESTARTS       AGE
+my-busybox                     1/1     Running   93 (31m ago)   62d
+postgres-set-0                 1/1     Running   0              104s
+project-dep-765bb84fc5-zntb4   1/1     Running   0              104s
+backend-dep-84fc7bf665-jhzl9   1/1     Running   0              104s
+backend-dep-8656487dd5-xnfkt   1/1     Running   0              103s
+```
+
 # Exercise 4.03
 Installed the prometheus like instructed
 ```bash
