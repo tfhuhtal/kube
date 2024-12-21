@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv'
 import express, { response } from 'express'
+import methodOverride from "method-override"
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
@@ -45,6 +46,7 @@ app.use(cors())
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('files'))
+app.use(methodOverride("_method"))
 app.set('views', './views')
 app.set('view engine', 'pug')
 
@@ -59,6 +61,18 @@ app.post('/', async (req, res) => {
   const { title } = req.body
 
   await axios.post('http://backend-svc:2345/todos', { title })
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(err => console.error(err))
+
+  res.redirect('/')
+})
+
+app.put('/todos/:id', async (req, res) => {
+  const { id } = req.params
+
+  await axios.put(`http://backend-svc:2345/todos/${id}`)
     .then(response => {
       console.log(response.data)
     })

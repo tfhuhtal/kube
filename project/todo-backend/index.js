@@ -45,6 +45,21 @@ app.post('/todos', async (req, res) => {
   res.status(201).json({ message: 'Todo created' })
 })
 
+app.put('/todos/:id', async (req, res) => {
+  const { id } = req.params
+  const todo = await Todo.findByPk(id)
+
+  if (!todo) {
+    return res.status(404).json({ message: 'Todo not found' })
+  }
+
+  todo.done = !todo.done
+  await todo.save()
+
+  logger.info('Todo updated', { id })
+  res.json(todo)
+})
+
 app.listen(PORT, async () => {
   await connectToDB()
   await seed()

@@ -1,3 +1,39 @@
+# Exercise 4.05 
+
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl apply -k project/
+secret/postgres-secret created
+service/backend-svc created
+service/postgres-db-svc created
+service/project-svc created
+persistentvolumeclaim/project-claim created
+deployment.apps/backend-dep created
+deployment.apps/project-dep created
+statefulset.apps/postgres-set created
+cronjob.batch/pg-backup created
+cronjob.batch/todo-cron created
+analysistemplate.argoproj.io/cpu-usage created
+rollout.argoproj.io/backend-dep created
+ingress.networking.k8s.io/project-ingress created
+tuomas@zoe:~/kurssit/kube$ kubectl port-forward project-dep-cbc5f476b-ptbps 8080:8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+Handling connection for 8080
+^Ctuomas@zoe:~/kurssit/kube$ kubectl port-forward project-dep-cbc5f476b-ptbps 8080:8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+Handling connection for 8080
+^Ctuomas@zoe:~/kurssit/kube$ kubectl get po
+NAME                           READY   STATUS    RESTARTS         AGE
+postgres-set-0                 1/1     Running   0                5m40s
+project-dep-cbc5f476b-ptbps    1/1     Running   0                5m40s
+backend-dep-759b5b89f-tg526    1/1     Running   0                5m41s
+backend-dep-865f7ccdbc-pqftf   1/1     Running   0                5m40s
+my-busybox                     1/1     Running   94 (3m53s ago)   62d
+```
+
+![done](./assets/v1_9.png)
+
 # Exercise 4.04
 
 ```bash

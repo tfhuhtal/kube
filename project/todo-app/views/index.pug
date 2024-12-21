@@ -9,4 +9,7 @@ html
       button(type='submit') Send
     ul
       each todo in todos
-        li= todo.title
+        li
+        form(action=`/todos/${todo.id}?_method=PUT`, method='POST')
+          input(type="checkbox", name="done", checked=todo.done, onchange="this.form.submit()")
+        span= todo.title

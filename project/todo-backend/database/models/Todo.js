@@ -14,6 +14,10 @@ Todo.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    done: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize,
