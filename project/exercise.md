@@ -34,6 +34,22 @@ my-busybox                     1/1     Running   94 (3m53s ago)   62d
 
 ![done](./assets/v1_9.png)
 
+```bash
+> project@1.0.0 start
+> node index.js
+
+Server started on port 8080
+Cached image not found or expired. Fetching new image...
+Image fetched and saved to /usr/src/app/files/cached-image.jpg
+Cached image found.
+{
+  id: 5,
+  title: 'Read https://en.wikipedia.org/wiki/List_of_Royal_Flying_Corps_generals',
+  done: true
+}
+Cached image found.
+```
+
 # Exercise 4.04
 
 ```bash
