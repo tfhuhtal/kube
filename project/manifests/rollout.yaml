@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: backend-dep
+  name: backend
   namespace: project
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend-dep
+      app: backend
   strategy: 
     canary:
       steps:
@@ -18,11 +18,13 @@ spec:
   template:
     metadata:
       labels:
-        app: backend-dep
+        app: backend
     spec:
       containers:
         - name: backend
           image: BACKEND_IMAGE
+          ports:
+            - containerPort: 3001
           readinessProbe:
             initialDelaySeconds: 5
             periodSeconds: 5
@@ -37,11 +39,11 @@ spec:
               port: 3001
           resources:
             limits:
-              cpu: "150m"
-              memory: "100Mi"
+              cpu: "500m"
+              memory: "500Mi"
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
+                  name: project-secret
                   key: POSTGRES_PASSWORD

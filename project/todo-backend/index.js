@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { connect, JSONCodec } from 'nats'
 import { connectToDB, sequelize } from './database/connection.js'
 import seed from './database/seed.js'
 import Todo from './database/models/Todo.js'
@@ -8,6 +9,9 @@ import { validateTodo } from './utils/validator.js'
 
 const app = express()
 const PORT = 3001
+
+const nats = await connect({ servers: 'nats://my-nats.project.svc.cluster.local:4222' })  
+const jsonCodec = JSONCodec()
 
 app.use(cors())
 app.use(express.json())
@@ -39,9 +43,15 @@ app.post('/todos', async (req, res) => {
   }
   const { title } = todo
 
-  await Todo.create({ title })
+  const newTodo = await Todo.create({ title })
+
+  const msg = {
+    reason: 'create',
+    data: newTodo,
+  }
 
   logger.info('Todo created', { title })
+  nats.publish('todos', jsonCodec.encode(msg))
   res.status(201).json({ message: 'Todo created' })
 })
 
@@ -54,9 +64,15 @@ app.put('/todos/:id', async (req, res) => {
   }
 
   todo.done = !todo.done
-  await todo.save()
+  const updatedTodo = await todo.save()
+
+  const msg = {
+    reason: 'update',
+    data: updatedTodo,
+  }
 
   logger.info('Todo updated', { id })
+  nats.publish('todos', jsonCodec.encode(msg))
   res.json(todo)
 })
 

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: project-dep
+  name: project
 spec:
   replicas: 1
   selector:
@@ -30,35 +30,27 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-dep
+  name: publisher
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: publisher
   template:
     metadata:
       labels:
-        app: backend
+        app: publisher
     spec:
       containers:
-        - name: backend
-          image: BACKEND_IMAGE
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 3001
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 3001
+        - name: publisher
+          image: PUBLISHER_IMAGE
           resources:
             limits:
               cpu: "150m"
               memory: "100Mi"
           env:
-            - name: POSTGRES_PASSWORD
+            - name: TELEGRAM_BOT_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret 
-                  key: POSTGRES_PASSWORD
+                  name: project-secret 
+                  key: TELEGRAM_BOT_TOKEN

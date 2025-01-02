@@ -34,7 +34,7 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
+                  name: project-secret
                   key: POSTGRES_PASSWORD
           ports:
             - name: postgres

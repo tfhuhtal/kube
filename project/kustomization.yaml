@@ -17,8 +17,9 @@ images:
   - name: FRONTEND_IMAGE
     newName: tfhuhtal/todo-app:v1.9
   - name: BACKEND_IMAGE
-    newName: tfhuhtal/todo-backend:v1.9
+    newName: tfhuhtal/todo-backend:v2.0
   - name: CRONJOB_IMAGE
     newName: tfhuhtal/todo-cron:2.092
   - name: PG_BACKUP_IMAGE
-
+  - name: PUBLISHER_IMAGE
+    newName: tfhuhtal/todo-publisher:v2.001

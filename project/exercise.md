@@ -1,3 +1,15 @@
+# Exercise 4.06
+
+Installed nats and set it up using instructions.
+
+Then I created the todo-publisher.
+
+Also I modified the project backend to connect to the nats when creating new todo or updating todos
+
+Then I created telegram bot and connected it to the publisher
+
+![picture_nats](./assets/nats.png)
+
 # Exercise 4.05 
 
 ```bash

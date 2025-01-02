@@ -7,17 +7,17 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: project-svc
-            port:
-              number: 2345
       - path: /todos
         pathType: ImplementationSpecific
         backend:
           service:
             name: backend-svc
+            port:
+              number: 2345
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: project-svc
             port:
               number: 2345
