@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - manifests/deployment.yaml
   - manifests/service.yaml
-  - manifests/secert.yaml
+  - manifests/secret.enc.yaml
   - manifests/postgres.yaml
 
 images:
