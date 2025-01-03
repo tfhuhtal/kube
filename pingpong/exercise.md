@@ -1,3 +1,15 @@
+# Exercise 4.07
+
+Installed the argoCD and by following the courses instructions.
+
+Changed the sops encrypted secret to sealedsecret
+
+Then created the argo application
+
+And then updated the GHA workflow for pingpong
+
+![pingpong](../project/assets/pingpong.png)
+
 # Exercise 4.01
 
 ```bash
