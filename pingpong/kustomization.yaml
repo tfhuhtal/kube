@@ -8,5 +8,5 @@ resources:
   - manifests/postgres.yaml
 
 images:
-  name: PINGPONG_IMAGE
-  newName: tfhuhtal/pingpong:4.1
+  - name: PINGPONG_IMAGE
+    newName: tfhuhtal/pingpong:4.1
