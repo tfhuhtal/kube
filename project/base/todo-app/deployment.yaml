@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: project
+    spec:
+      containers:
+        - name: project
+          image: FRONTEND_IMAGE
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
+          volumeMounts:
+            - name: project-volume
+              mountPath: /usr/src/app/files
+      volumes:
+        - name: project-volume 
+          persistentVolumeClaim:
+            claimName: project-claim

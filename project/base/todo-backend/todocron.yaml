@@ -14,5 +14,3 @@ spec:
             image: CRONJOB_IMAGE
             imagePullPolicy: Always
           restartPolicy: OnFailure
----
-

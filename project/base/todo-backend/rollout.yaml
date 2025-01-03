@@ -45,5 +45,5 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: project-secret
+                  name: postgres-secret
                   key: POSTGRES_PASSWORD
