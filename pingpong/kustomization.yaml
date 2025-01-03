@@ -10,4 +10,4 @@ resources:
 images:
 - name: PINGPONG_IMAGE
   newName: tfhuhtal/pingpong
-  newTag: 292e8f5b98ccf6817cf6f65e782fe5e308461cc1
+  newTag: fe4ede56e2f88f4e0cb6a54bd6c084400153b0cd
