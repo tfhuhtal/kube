@@ -8,7 +8,6 @@ resources:
   - ../../base/todo-app
   - todo-publisher/sealedsecret.yaml
   - todo-backend/sealedsecret.yaml
-namePrefix: staging-
 
 images:
   - name: FRONTEND_IMAGE

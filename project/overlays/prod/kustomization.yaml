@@ -10,8 +10,6 @@ resources:
   - todo-backend/backupcron.yaml
   - todo-publisher/sealedsecret.yaml
 
-namePrefix: prod-
-
 images:
   - name: FRONTEND_IMAGE
     newName: tfhuhtal/todo-app:v1.9
