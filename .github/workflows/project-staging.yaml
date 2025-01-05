@@ -51,4 +51,4 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: 'project/overlays/staging/kustomization.yaml'
-          message: New version released to staging
+          message: New version ${{ github.sha }} released to staging
