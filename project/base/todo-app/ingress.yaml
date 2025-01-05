@@ -7,14 +7,14 @@ spec:
   - http:
       paths:
       - path: /todos
-        pathType: ImplementationSpecific
+        pathType: prefix
         backend:
           service:
             name: backend-svc
             port:
               number: 2345
       - path: /
-        pathType: ImplementationSpecific
+        pathType: prefix
         backend:
           service:
             name: project-svc
