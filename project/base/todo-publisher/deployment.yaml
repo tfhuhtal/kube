@@ -26,4 +26,4 @@ spec:
                   name: telegram-secret 
                   key: TELEGRAM_BOT_TOKEN
             - name: NATS_SERVER
-              value: nats://my-nats.svc.cluster.local:4222
+              value: nats://nats.svc.cluster.local:4222
