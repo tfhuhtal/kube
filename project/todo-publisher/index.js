@@ -1,10 +1,11 @@
 import { connect, JSONCodec } from 'nats'
 import TelegramBot from 'node-telegram-bot-api'
 
+const NATS_SERVER = process.env.NATS_SERVER
 const TELEGRAM_CHAT_ID = '1848265945'
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
 
-const nats = await connect({ servers: 'nats://my-nats.project.svc.cluster.local:4222' })
+const nats = await connect({ servers: NATS_SERVER })
 const jsonCodec = JSONCodec()
 
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: false })

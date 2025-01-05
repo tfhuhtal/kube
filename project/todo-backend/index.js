@@ -9,8 +9,9 @@ import { validateTodo } from './utils/validator.js'
 
 const app = express()
 const PORT = 3001
+const NATS_SERVER = process.env.NATS_SERVER
 
-const nats = await connect({ servers: 'nats://my-nats.project.svc.cluster.local:4222' })  
+const nats = await connect({ servers: NATS_SERVER })
 const jsonCodec = JSONCodec()
 
 app.use(cors())
