@@ -3,18 +3,22 @@ kind: Kustomization
 namespace: staging
 
 resources:
-  - ../../base/todo-backend
-  - ../../base/todo-publisher
-  - ../../base/todo-app
-  - todo-publisher/sealedsecret.yaml
-  - todo-backend/sealedsecret.yaml
+- ../../base/todo-backend
+- ../../base/todo-publisher
+- ../../base/todo-app
+- todo-publisher/sealedsecret.yaml
+- todo-backend/sealedsecret.yaml
 
 images:
-  - name: FRONTEND_IMAGE
-    newName: tfhuhtal/todo-app:v1.9
-  - name: BACKEND_IMAGE
-    newName: tfhuhtal/todo-backend:v2.0
-  - name: CRONJOB_IMAGE
-    newName: tfhuhtal/todo-cron:2.092
-  - name: PUBLISHER_IMAGE
-    newName: tfhuhtal/todo-publisher:v2.001
+- name: BACKEND_IMAGE
+  newName: tfhuhtal/todo-backend
+  newTag: f52613260f10ed736d54972565f275624b63b88c
+- name: CRONJOB_IMAGE
+  newName: tfhuhtal/todo-cron
+  newTag: f52613260f10ed736d54972565f275624b63b88c
+- name: FRONTEND_IMAGE
+  newName: tfhuhtal/todo-app
+  newTag: f52613260f10ed736d54972565f275624b63b88c
+- name: PUBLISHER_IMAGE
+  newName: tfhuhtal/todo-publisher
+  newTag: f52613260f10ed736d54972565f275624b63b88c
