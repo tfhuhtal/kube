@@ -14,6 +14,7 @@ const sub = nats.subscribe('todos', { queue: 'broadcaster.workers' })
 
 for await (const msg of sub) {
   const todo = jsonCodec.decode(msg.data)
+  console.log('Todo:', todo)
   bot.sendMessage(TELEGRAM_CHAT_ID, `Todo: ${JSON.stringify(todo, null, 2)}`, { parse_mode: 'HTML' })
 }
 

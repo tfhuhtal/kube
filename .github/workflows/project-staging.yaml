@@ -1,0 +1,54 @@
+name: Build and publish project to staging
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'project/**'
+      - '.github/workflows/project-staging.yaml'
+
+jobs:
+  build-publish:
+    name: Build, push and publish to staging
+    runs-on: ubuntu-latest
+    environment: sirit
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and publish application
+        working-directory: project
+        run: |-
+          docker build --tag tfhuhtal/todo-backend:${GITHUB_SHA} todo-backend
+          docker build --tag tfhuhtal/todo-app:${GITHUB_SHA} todo-app
+          docker build --tag tfhuhtal/todo-publisher:${GITHUB_SHA} todo-publisher
+          docker build --tag tfhuhtal/todo-cron:${GITHUB_SHA} cron
+          docker push tfhuhtal/todo-backend:${GITHUB_SHA}
+          docker push tfhuhtal/todo-app:${GITHUB_SHA}
+          docker push tfhuhtal/todo-publisher:${GITHUB_SHA}
+          docker push tfhuhtal/todo-cron:${GITHUB_SHA}
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Update images in kustomization.yaml
+        working-directory: project/overlays/staging
+        run: |-
+          kustomize edit set image FRONTEND_IMAGE=tfhuhtal/todo-app:${GITHUB_SHA}
+          kustomize edit set image BACKEND_IMAGE=tfhuhtal/todo-backend:${GITHUB_SHA}
+          kustomize edit set image CRONJOB_IMAGE=tfhuhtal/todo-cron:${GITHUB_SHA}
+          kustomize edit set image PUBLISHER_IMAGE=tfhuhtal/todo-publisher:${GITHUB_SHA}
+
+      - name: Commit changes to kustomization.yaml
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'project/overlays/staging/kustomization.yaml'
+          message: New version ${GITHUB_SHA} released to staging
