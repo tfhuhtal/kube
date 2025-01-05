@@ -6,8 +6,8 @@ resources:
 - ../../base/todo-backend
 - ../../base/todo-publisher
 - ../../base/todo-app
-- todo-publisher/sealedsecret.yaml
-- todo-backend/sealedsecret.yaml
+- ./todo-publisher/sealedsecret.yaml
+- ./todo-backend/sealedsecret.yaml
 
 images:
 - name: BACKEND_IMAGE

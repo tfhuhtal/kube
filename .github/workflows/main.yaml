@@ -1,5 +1,4 @@
 # name: Release project
-
 # on:
 #   push:
 #     paths:
