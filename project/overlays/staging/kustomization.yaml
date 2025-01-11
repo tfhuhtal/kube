@@ -12,13 +12,13 @@ resources:
 images:
 - name: BACKEND_IMAGE
   newName: tfhuhtal/todo-backend
-  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+  newTag: 9f507f9099ce753d27e551bca24067c146962bb5
 - name: CRONJOB_IMAGE
   newName: tfhuhtal/todo-cron
-  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+  newTag: 9f507f9099ce753d27e551bca24067c146962bb5
 - name: FRONTEND_IMAGE
   newName: tfhuhtal/todo-app
-  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+  newTag: 9f507f9099ce753d27e551bca24067c146962bb5
 - name: PUBLISHER_IMAGE
   newName: tfhuhtal/todo-publisher
-  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+  newTag: 9f507f9099ce753d27e551bca24067c146962bb5
