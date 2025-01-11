@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wikipedia-app
+  namespace: exercises
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wikipedia-app
+  template:
+    metadata:
+      labels:
+        app: wikipedia-app
+    spec:
+      volumes:
+        - name: shared-data
+          emptyDir: {}
+      initContainers:
+        - name: fetch-kubernetes-page
+          image: curlimages/curl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              curl -o /usr/share/nginx/html/index.html https://en.wikipedia.org/wiki/Kubernetes
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/share/nginx/html
+      containers:
+        - name: nginx
+          image: nginx:latest
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/share/nginx/html
+        - name: fetch-random-page
+          image: curlimages/curl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              while true; do
+                sleep $((RANDOM % 600 + 300));
+                curl -o /usr/share/nginx/html/random.html https://en.wikipedia.org/wiki/Special:Random;
+              done
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/share/nginx/html
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wikipedia-app-service
+  namespace: exercises
+spec:
+  selector:
+    app: wikipedia-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wikipedia-app-ingress
+  namespace: exercises
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wikipedia-app-service
+                port:
+                  number: 80
