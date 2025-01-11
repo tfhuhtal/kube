@@ -1,3 +1,18 @@
+# Exercise 4.08
+
+Rearranged manifests to new structure following the principles that was shown in the course material.
+
+Then changed secrets to sealed secrets and installed the sealed secret operator to my cluster
+
+Then created github workflows to handle pushes and new tag creation.
+
+Here is images that publisher pushes image to telegram only when in prod
+
+![image1231](./assets/argoprod.png)
+![imafe21311](./assets/argostaging.png)
+
+The staging throws error cuz, I provided falsy url so the publishing fails.
+
 # Exercise 4.06
 
 Installed nats and set it up using instructions.
