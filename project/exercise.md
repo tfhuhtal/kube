@@ -1,3 +1,7 @@
+# Exercise 5.03
+
+![script](./assets/5_3.png)
+
 # Exercise 5.02
 
 Modified the svc to ClusterIP and removed nginx ingress
@@ -36,6 +40,8 @@ Here is images that publisher pushes image to telegram only when in prod
 
 ![image1231](./assets/argoprod.png)
 ![imafe21311](./assets/argostaging.png)
+![](./assets/argocd1.png)
+![](./assets/argocd2.png)
 
 The staging throws error cuz, I provided falsy url so the publishing fails.
 
