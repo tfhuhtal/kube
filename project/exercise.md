@@ -1,3 +1,29 @@
+# Exercise 5.02
+
+Modified the svc to ClusterIP and removed nginx ingress
+
+then installed linkerd and run these commands
+
+```bash
+tuomas@zoe:~/kurssit/kube$ kubectl get -n prod deploy -o yaml | linkerd inject - | kubectl apply -f -
+
+deployment "nats" injected
+deployment "publisher" injected
+deployment "project" injected
+
+deployment.apps/nats configured
+deployment.apps/publisher configured
+deployment.apps/project configured
+tuomas@zoe:~/kurssit/kube$ linkerd viz dashboard
+Linkerd dashboard available at:
+http://localhost:50750
+Grafana dashboard available at:
+http://localhost:50750/grafana
+Opening Linkerd dashboard in the default browser
+```
+![img](./assets/svcmesh.png)
+
+
 # Exercise 4.08
 
 Rearranged manifests to new structure following the principles that was shown in the course material.

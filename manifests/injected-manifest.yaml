@@ -1,0 +1,212 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "10"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"project-prod"},"name":"project","namespace":"prod"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"project"}},"strategy":{"type":"Recreate"},"template":{"metadata":{"labels":{"app":"project"}},"spec":{"containers":[{"image":"tfhuhtal/todo-app:41d0afb93049dcc5009edd2982db2be9fb5c1850","name":"project","resources":{"limits":{"cpu":"150m","memory":"100Mi"}},"volumeMounts":[{"mountPath":"/usr/src/app/files","name":"project-volume"}]}],"volumes":[{"name":"project-volume","persistentVolumeClaim":{"claimName":"project-claim"}}]}}}}
+    generation: 10
+    labels:
+      app.kubernetes.io/instance: project-prod
+    name: project
+    namespace: prod
+    resourceVersion: "78533"
+    uid: 6faf3b6e-5286-4ef6-8a11-db8f3cb6f9dd
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: project
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        annotations:
+          linkerd.io/inject: enabled
+        labels:
+          app: project
+      spec:
+        containers:
+        - image: tfhuhtal/todo-app:41d0afb93049dcc5009edd2982db2be9fb5c1850
+          imagePullPolicy: IfNotPresent
+          name: project
+          resources:
+            limits:
+              cpu: 150m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /usr/src/app/files
+            name: project-volume
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: project-volume
+          persistentVolumeClaim:
+            claimName: project-claim
+  status:
+    availableReplicas: 1
+    conditions:
+    - message: ReplicaSet "project-595f6c4597" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 10
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "10"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"project-prod"},"name":"publisher","namespace":"prod"},"spec":{"replicas":6,"selector":{"matchLabels":{"app":"publisher"}},"template":{"metadata":{"labels":{"app":"publisher"}},"spec":{"containers":[{"env":[{"name":"TELEGRAM_BOT_TOKEN","valueFrom":{"secretKeyRef":{"key":"TELEGRAM_BOT_TOKEN","name":"telegram-secret"}}},{"name":"NATS_SERVER","value":"nats://nats:4222"}],"image":"tfhuhtal/todo-publisher:41d0afb93049dcc5009edd2982db2be9fb5c1850","name":"publisher","resources":{"limits":{"cpu":"150m","memory":"100Mi"}}}]}}}}
+    generation: 10
+    labels:
+      app.kubernetes.io/instance: project-prod
+    name: publisher
+    namespace: prod
+    resourceVersion: "78591"
+    uid: a5c05d2f-6864-4f87-88d5-f54b013d9cc6
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 6
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: publisher
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          linkerd.io/inject: enabled
+        labels:
+          app: publisher
+      spec:
+        containers:
+        - env:
+          - name: TELEGRAM_BOT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                key: TELEGRAM_BOT_TOKEN
+                name: telegram-secret
+          - name: NATS_SERVER
+            value: nats://nats:4222
+          image: tfhuhtal/todo-publisher:41d0afb93049dcc5009edd2982db2be9fb5c1850
+          imagePullPolicy: IfNotPresent
+          name: publisher
+          resources:
+            limits:
+              cpu: 150m
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 6
+    conditions:
+    - message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - message: ReplicaSet "publisher-55d89b7b95" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 10
+    readyReplicas: 6
+    replicas: 6
+    updatedReplicas: 6
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "9"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"project-prod"},"name":"nats","namespace":"prod"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"nats"}},"template":{"metadata":{"labels":{"app":"nats"}},"spec":{"containers":[{"args":["-m","8222"],"image":"nats:latest","name":"nats","ports":[{"containerPort":4222},{"containerPort":6222},{"containerPort":8222}]}]}}}}
+    generation: 9
+    labels:
+      app.kubernetes.io/instance: project-prod
+    name: nats
+    namespace: prod
+    resourceVersion: "78605"
+    uid: 22db57db-474e-4eab-b4d5-4108f2f76d39
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: nats
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          linkerd.io/inject: enabled
+        labels:
+          app: nats
+      spec:
+        containers:
+        - args:
+          - -m
+          - "8222"
+          image: nats:latest
+          imagePullPolicy: Always
+          name: nats
+          ports:
+          - containerPort: 4222
+            protocol: TCP
+          - containerPort: 6222
+            protocol: TCP
+          - containerPort: 8222
+            protocol: TCP
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - message: ReplicaSet "nats-5ff4d846f4" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 9
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: List
+metadata: {}
+---
