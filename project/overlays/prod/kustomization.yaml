@@ -3,21 +3,26 @@ kind: Kustomization
 namespace: prod
 
 resources:
-  - ../../base/todo-backend
-  - ../../base/todo-publisher
-  - ../../base/todo-app
-  - todo-backend/sealedsecret.yaml
-  - todo-backend/backupcron.yaml
-  - todo-publisher/sealedsecret.yaml
+- ../../base/todo-backend
+- ../../base/todo-publisher
+- ../../base/todo-app
+- todo-backend/sealedsecret.yaml
+- todo-backend/backupcron.yaml
+- todo-publisher/sealedsecret.yaml
 
 images:
-  - name: FRONTEND_IMAGE
-    newName: tfhuhtal/todo-app:v1.9
-  - name: BACKEND_IMAGE
-    newName: tfhuhtal/todo-backend:4.08
-  - name: CRONJOB_IMAGE
-    newName: tfhuhtal/todo-cron:2.092
-  - name: PG_BACKUP_IMAGE
-    newName: tfhuhtal/testing-pg-backup:1.6
-  - name: PUBLISHER_IMAGE
-    newName: tfhuhtal/todo-publisher:4.08
+- name: BACKEND_IMAGE
+  newName: tfhuhtal/todo-backend
+  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+- name: CRONJOB_IMAGE
+  newName: tfhuhtal/todo-cron
+  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+- name: FRONTEND_IMAGE
+  newName: tfhuhtal/todo-app
+  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+- name: PG_BACKUP_IMAGE
+  newName: tfhuhtal/backup-db
+  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
+- name: PUBLISHER_IMAGE
+  newName: tfhuhtal/todo-publisher
+  newTag: 41d0afb93049dcc5009edd2982db2be9fb5c1850
