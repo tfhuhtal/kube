@@ -1,3 +1,27 @@
+# Exercises 5.07
+
+```tuomas@zoe:~/kurssit/kube$ kubectl apply -k pingpong/
+service/postgres-svc created
+statefulset.apps/postgres-set created
+Warning: Kubernetes default value is insecure, Knative may default this to secure in a future release: spec.template.spec.containers[0].securityContext.allowPrivilegeEscalation, spec.template.spec.containers[0].securityContext.capabilities, spec.template.spec.containers[0].securityContext.runAsNonRoot, spec.template.spec.containers[0].securityContext.seccompProfile
+service.serving.knative.dev/pingpong-dep created
+tuomas@zoe:~/kurssit/kube$ kubectl get ksvc
+NAME           URL                                                 LATESTCREATED        LATESTREADY          READY   REASON
+pingpong-dep   http://pingpong-dep.exercises.172.20.0.2.sslip.io   pingpong-dep-00001   pingpong-dep-00001   True
+tuomas@zoe:~/kurssit/kube$ curl -H "Host: pingpong-dep.exercises.172.20.0.2.sslip.io" localhost:8081/pingpong
+
+Ping / Pongs: 0
+tuomas@zoe:~/kurssit/kube$ curl -H "Host: pingpong-dep.exercises.172.20.0.2.sslip.io" localhost:8081/pingpong
+
+Ping / Pongs: 1
+tuomas@zoe:~/kurssit/kube$ curl -H "Host: pingpong-dep.exercises.172.20.0.2.sslip.io" localhost:8081/pingpong
+
+Ping / Pongs: 2
+tuomas@zoe:~/kurssit/kube$ curl -H "Host: pingpong-dep.exercises.172.20.0.2.sslip.io" localhost:8081/pingpong
+
+Ping / Pongs: 3
+```
+
 # Exercise 4.07
 
 Installed the argoCD and by following the courses instructions.

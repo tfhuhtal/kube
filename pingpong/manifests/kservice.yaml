@@ -1,0 +1,18 @@
+apiVersion: serving.knative.dev/v1
+kind: service
+metadata:
+  namespace: exercises
+  name: pingpong-dep
+spec:
+  template:
+    spec:
+      containers:
+        - image: PINGPONG_IMAGE
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+          ports:
+            - containerPort: 3000
